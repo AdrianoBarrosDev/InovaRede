@@ -1,11 +1,11 @@
-import { LoginUsu } from "../components/LoginUsu";
+import { LoginUser } from "../components/LoginUser";
 
 
 export function Login() {
 
     return (
         <>
-                <LoginUsu />
+                <LoginUser />
         </>
     );
 

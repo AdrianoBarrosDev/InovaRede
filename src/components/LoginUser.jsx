@@ -3,7 +3,7 @@ import styled from "styled-components";
 const DivHead = styled.div`
 
     background-color:#e7e7e7f8;
-    background-image: url("public/images/Group 26 (1).png");
+    background-image: url("/images/Group 26 (1).png");
     background-repeat: no-repeat;
     background-size:100%;
     bottom: 0;
@@ -86,7 +86,7 @@ const DivHead = styled.div`
     }
 `;
 
-export function LoginUsu() {
+export function LoginUser() {
 
     return (
         <>

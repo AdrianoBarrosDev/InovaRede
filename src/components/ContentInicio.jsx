@@ -89,13 +89,13 @@ export function ContentInicio() {
                 <p class="fs-4">A InovaRede é uma plataforma que conecta projetos acadêmicos inovadores a um vasto universo de possibilidades. Facilitamos a colaboração entre estudantes, pesquisadores e profissionais de diversas áreas, criando um ambiente propício para o compartilhamento de ideias, o desenvolvimento de pesquisas e a criação de soluções que podem transformar a sociedade.<br/><br/> Nosso objetivo é promover a inovação por meio da união de mentes criativas e do fortalecimento de iniciativas acadêmicas que buscam impactar positivamente o mundo. Através de nossa rede, você tem acesso a oportunidades de colaboração, capacitação e crescimento profissional, além de poder conectar-se com especialistas, parceiros e recursos que potencializam seus projetos acadêmicos.<br/><br/> A InovaRede acredita no poder da colaboração interdisciplinar e no impacto das ideias que, juntas, podem mudar o futuro.</p>
             </div>
             <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center ">
-                <img src="public\images\image 302.png" className="img-fluid" alt="..."></img>
+                <img src="\images\image 302.png" className="img-fluid" alt="..."></img>
             </div>
             </DivHead>
 
             <DivHead2 className="container-fluid row w-100">
             <div className="col-12 col-lg-6 d-flex justify-content-center align-items-center">
-                <img  src="public\images\image.png" class="img-fluid" alt="..."></img>
+                <img  src="\images\image.png" class="img-fluid" alt="..."></img>
             </div>
             <div className="col-12 col-lg-6">
                 <p class="fs-1"><strong> Quem Somos??</strong></p>
