@@ -3,7 +3,7 @@ import styled from "styled-components";
 const DivHead = styled.div`
 
     background-color:#e7e7e7f8;
-    background-image: url("public/images/Group 26 (1).png");
+    background-image: url("images/Group 26 (1).png");
     background-repeat: no-repeat;
     background-size:100%;
     bottom: 0;
@@ -23,8 +23,8 @@ const DivHead = styled.div`
     .login_tela{
         border-radius: 0px 25px 25px  0px;
         background-color:white;
-        width: 450px;
-        height: 60%;
+        width: 500px;
+        height: 70%;
         display: flex; 
         justify-content: center;
         flex-direction: column;
@@ -35,8 +35,8 @@ const DivHead = styled.div`
     .left_div{
         background-color: #DAE6F2;
         border-radius: 25px 0px 0px 25px;
-        width: 250px;
-        height:60%;
+        width: 300px;
+        height: 70%;
     }
 
     .fs-1{
@@ -45,7 +45,7 @@ const DivHead = styled.div`
     }
 
     .fs-2{
-        margin: 80px 0px 100px 0px ;
+        margin: 120px 0px 100px 0px ;
         font-family: Lexend Mega;
     }
 
@@ -79,56 +79,79 @@ const DivHead = styled.div`
 
 export function CadastroUser() {
 
+    const handleClick = () => {
+
+        const username = document.getElementById("registerUsername").value;
+        const name = document.getElementById("registerName").value;
+        const email = document.getElementById("registerEmail").value;
+        const password = document.getElementById("registerPassword").value;
+        const course = document.getElementById("registerCourse").value;
+
+        fetch("http://localhost:8080/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, name, email, password, course })
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/login";
+            } else {
+                throw new Error("Cadastro falhou");
+            }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+        });
+    };
+
     return (
-        <>
-                <DivHead>
-                    <div className="col-mg- left_div">
-                        <p className="fs-2">
-                            InovaRede
-                        </p>
-                        <p className="fs-3">Ainda não possui uma conta?</p>
-                        <p className="fs-3">Faça o cadastro agora</p>
-                                
-                            
-                            <button type="button" className="btn btn-light">Cadastrar</button>
+        <DivHead>
+            <div className="col-mg- left_div">
+                <p className="fs-2">
+                    InovaRede
+                </p>
+                <p className="fs-3">Já possui uma conta?</p>
+                <p className="fs-3">Entre agora mesmo</p>
+                <button type="button" className="btn btn-light" onClick={() => window.location.href = "/login"}>Entrar</button>
+            </div>
+                <div className="col-mg- login_tela">
+                    <p className="fs-1">Cadastrar</p> 
+                    
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="registerUsername" placeholder=" "/>
+                        <label htmlFor="registerUsername" id="CadastroNomeUser">Nome de usuário</label>
                     </div>
-                        <div className="col-mg- login_tela">
-                            <p className="fs-1">Cadastrar:</p> 
-                           
-                            <div className="form-floating mb-3">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                <label htmlFor="floatingInput" id="CadastroNomeUser">Nome de usuário</label>
-                            </div>
-                            
-                            <div className="form-floating mb-3">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                <label htmlFor="floatingInput" id="CadastroNome">Nome</label>
-                            </div>
-                            
-                            <div className="form-floating mb-3">
-                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                <label htmlFor="floatingInput" id="CadastroEmail">Email</label>
-                            </div>
-                            
-                            <div className="form-floating senha">
-                                <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
-                                <label htmlFor="floatingPassword" id="CadastroSenha">Senha</label>
-                            </div>
-                            
-                            <div className="form-floating option">
-                                <select className="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                    <option selected>Selecione o curso</option>
-                                    <option value="1">Computação</option>
-                                    <option value="2">Direito</option>
-                                    <option value="3">Sistemas</option>
-                                    <option value="4">Engenharia</option>
-                                </select>
-                                <label htmlFor="floatingSelect">Selecione o curso</label>
-                            </div>
-                            <button type="button" className="btn btn-secondary">Cadastrar</button>     
-                        </div>
-                </DivHead>
-        </>
+                    
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="registerName" placeholder=" "/>
+                        <label htmlFor="registerName" id="CadastroNome">Nome</label>
+                    </div>
+                    
+                    <div className="form-floating mb-3">
+                        <input type="text" className="form-control" id="registerEmail" placeholder=" "/>
+                        <label htmlFor="registerEmail" id="CadastroEmail">Email</label>
+                    </div>
+                    
+                    <div className="form-floating senha">
+                        <input type="password" className="form-control" id="registerPassword" placeholder=" "/>
+                        <label htmlFor="registerPassword" id="CadastroSenha">Senha</label>  
+                    </div>
+                    
+                    <div className="form-floating option">
+                        <select className="form-select" id="registerCourse" aria-label="Floating label select example">
+                            <option value="" disabled hidden>Selecione o curso</option>
+                            <option value="Computação">Computação</option>
+                            <option value="Direito">Direito</option>
+                            <option value="Sistemas">Sistemas</option>
+                            <option value="Engenharia">Engenharia</option>
+                        </select>
+                        <label htmlFor="registerCourse">Selecione o curso</label>
+                    </div>
+                    <button type="button" className="btn btn-secondary" onClick={handleClick}>Cadastrar</button>     
+                </div>
+        </DivHead>
     );
 
 }

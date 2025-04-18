@@ -29,16 +29,17 @@ const DivHead = styled.div`
         align-items: center;
         border-radius: 0px 25px 25px  0px;
         background-color:white;
-        width: 450px;
-        height: 60%;
+        width: 500px;
+        height: 70%;
         padding: 50px;
+        padding-top: 100px;
     }
 
     .left_div{
         background-color: #DAE6F2;
         border-radius: 25px 0px 0px 25px;
-        width: 250px;
-        height: 60%;
+        width: 300px;
+        height: 70%;
     }
 
     .fs-1{
@@ -48,7 +49,7 @@ const DivHead = styled.div`
     }
 
     .fs-2{
-        margin: 50px 0px 0px 0px ;
+        margin: 120px 0px 100px 0px ;
         font-family: Lexend Mega;
     }
 
@@ -136,12 +137,10 @@ export function LoginUser() {
     return (
         <DivHead>
             <div className="left_div">
-                <p className="fs-2">
-                    InovaRede <br /> <br /><br />
-                </p>
+                <p className="fs-2">InovaRede</p>
                 <p className="fs-3">Ainda não possui uma conta?</p>
                 <p className="fs-3">Faça o cadastro agora</p>
-                <button type="button" className="btn btn-light">Cadastrar</button>
+                <button type="button" className="btn btn-light" onClick={() => window.location.href = "/cadastro"}>Cadastrar</button>
             </div>
 
             <div className="login_tela">

@@ -1,11 +1,11 @@
-import { CadastroUsu } from "../components/CadastroUsu";
+import { CadastroUser } from "../components/CadastroUser";
 
 
 export function Cadastro() {
 
     return (
         <>
-                <CadastroUsu />
+            <CadastroUser />
         </>
     );
 
