@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { useUser } from "../context/UserContext";
 
 const DivHead = styled.div`
 
@@ -21,26 +23,28 @@ const DivHead = styled.div`
     display: flex; 
     
     .login_tela{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
         border-radius: 0px 25px 25px  0px;
         background-color:white;
         width: 450px;
-        height: 500px;
-        display: flex; 
-        justify-content: center;
-
+        height: 60%;
+        padding: 50px;
     }
 
     .left_div{
         background-color: #DAE6F2;
         border-radius: 25px 0px 0px 25px;
         width: 250px;
-        height: 500px;
+        height: 60%;
     }
 
     .fs-1{
-        position: absolute;
         font-family: 'Poppins';
         font-size: 25px !important;
+        margin-bottom: 60px;
     }
 
     .fs-2{
@@ -51,8 +55,6 @@ const DivHead = styled.div`
     .fs-3{
         font-family: 'Poppins';
         font-size: 18px !important;
-        text-align: left;
-        margin-left: 15px;
     }
 
     .btn-light{
@@ -62,20 +64,15 @@ const DivHead = styled.div`
     }
 
     .form-floating{
-        width: 100%;
-    }
-
-    .senha{
-        width: 100%;
+        width: 90%;
     }
 
     .btn-secondary{
         font-family: 'Poppins';
         font-size: 20px;
         height: 50px;
-        margin: 400px 0px 0px -0px;
+        margin: 80px 0px 0px 0px;
         width: 130px;
-        position: absolute;
     }
 
     ul{
@@ -84,45 +81,85 @@ const DivHead = styled.div`
         width: 100%;
         position: relative;
     }
+
 `;
 
 export function LoginUser() {
 
+    const { loginUser } = useUser();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleClick = () => {
+        fetch("http://localhost:8080/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/projetos";
+                saveUser();
+            } else {
+                throw new Error("Login falhou");
+            }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Usuário ou senha inválidos!");
+        });
+    };
+    
+    const saveUser = () => {
+
+        fetch(`http://localhost:8080/users/${username}`)
+        .then((response) => {
+
+            // Verifica se a resposta foi bem-sucedida
+            if (!response.ok) {
+                throw new Error('Erro ao buscar dados');
+            }
+
+            const data = response.json(); // Converte a resposta para JSON
+            loginUser(data);
+
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao salvar usuário!");
+        });
+
+    }
+
     return (
-        <>
-                <DivHead>
-                    <div class="col-mg- left_div">
-                        <p class="fs-2">
-                            InovaRede <br /> <br /><br />
-                        </p>
-                        <p class="fs-3">ainda não possui uma conta?<br /><br />
-                                faça o cadastro agora:
-                            </p>
-                            <button type="button" class="btn btn-light">Cadastrar</button>
-                    </div>
-                        <div class="col-mg- login_tela">
-                            <p class="fs-1"><br />Entrar:</p> 
-                            <ul>
-                                <li>
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                    <label for="floatingInput">Email ou nome de usuário</label>
-                                </div>
-                                </li>
-                                <li>
-                                    <br />
-                                </li>
-                                <li>
-                                <div class="form-floating senha">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"/>
-                                    <label for="floatingPassword">Senha</label>
-                                </div>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-secondary">Entrar</button>     
-                        </div>
-                </DivHead>
-        </>
+        <DivHead>
+            <div className="left_div">
+                <p className="fs-2">
+                    InovaRede <br /> <br /><br />
+                </p>
+                <p className="fs-3">Ainda não possui uma conta?</p>
+                <p className="fs-3">Faça o cadastro agora</p>
+                <button type="button" className="btn btn-light">Cadastrar</button>
+            </div>
+
+            <div className="login_tela">
+                <p className="fs-1">Entrar</p>
+
+                <div className="form-floating mb-3">
+                    <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setUsername(e.target.value)}/>
+                    <label htmlFor="floatingInput" id="loginUsername">Nome de usuário</label>
+                </div>
+                <div className="form-floating">
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                    <label htmlFor="floatingPassword" id="loginPassword">Senha</label>
+                </div>
+
+                <button type="button" className="btn btn-secondary" onClick={handleClick}>Entrar</button>     
+            </div>
+            
+        </DivHead>
     );
 
 }

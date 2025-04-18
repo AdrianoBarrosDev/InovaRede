@@ -5,7 +5,7 @@ export function Login() {
 
     return (
         <>
-                <LoginUser />
+            <LoginUser />
         </>
     );
 
