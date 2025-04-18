@@ -24,35 +24,34 @@ const DivHead = styled.div`
         border-radius: 0px 25px 25px  0px;
         background-color:white;
         width: 450px;
-        height: 500px;
+        height: 60%;
         display: flex; 
         justify-content: center;
-
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
     }
 
     .left_div{
         background-color: #DAE6F2;
         border-radius: 25px 0px 0px 25px;
         width: 250px;
-        height: 500px;
+        height:60%;
     }
 
     .fs-1{
-        position: absolute;
         font-family: 'Poppins';
         font-size: 25px !important;
     }
 
     .fs-2{
-        margin: 50px 0px 0px 0px ;
+        margin: 80px 0px 100px 0px ;
         font-family: Lexend Mega;
     }
 
     .fs-3{
         font-family: 'Poppins';
         font-size: 18px !important;
-        text-align: left;
-        margin-left: 15px;
     }
 
     .btn-light{
@@ -62,64 +61,71 @@ const DivHead = styled.div`
     }
 
     .form-floating{
-        width: 100%;
-    }
-
-    .senha{
-        width: 100%;
+        width: 110%;
     }
 
     .btn-secondary{
         font-family: 'Poppins';
         font-size: 20px;
         height: 50px;
-        margin: 400px 0px 0px -0px;
+        margin: 30px 0px 0px 0px;
         width: 130px;
-        position: absolute;
     }
 
-    ul{
-        margin: 150px 0px 0px -35px;
-        list-style-type:none;
-        width: 100%;
-        position: relative;
+    .option{
+        margin-top: 15px
     }
 `;
 
-export function CadastroUsu() {
+export function CadastroUser() {
 
     return (
         <>
                 <DivHead>
-                    <div class="col-mg- left_div">
-                        <p class="fs-2">
-                            InovaRede <br /> <br /><br />
+                    <div className="col-mg- left_div">
+                        <p className="fs-2">
+                            InovaRede
                         </p>
-                        <p class="fs-3">ainda não possui uma conta?<br /><br />
-                                faça o cadastro agora:
-                            </p>
-                            <button type="button" class="btn btn-light">Cadastrar</button>
+                        <p className="fs-3">Ainda não possui uma conta?</p>
+                        <p className="fs-3">Faça o cadastro agora</p>
+                                
+                            
+                            <button type="button" className="btn btn-light">Cadastrar</button>
                     </div>
-                        <div class="col-mg- login_tela">
-                            <p class="fs-1"><br />Entrar:</p> 
-                            <ul>
-                                <li>
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-                                    <label for="floatingInput">Email ou nome de usuário</label>
-                                </div>
-                                </li>
-                                <li>
-                                    <br />
-                                </li>
-                                <li>
-                                <div class="form-floating senha">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"/>
-                                    <label for="floatingPassword">Senha</label>
-                                </div>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-secondary">Entrar</button>     
+                        <div className="col-mg- login_tela">
+                            <p className="fs-1">Cadastrar:</p> 
+                           
+                            <div className="form-floating mb-3">
+                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                                <label htmlFor="floatingInput" id="CadastroNomeUser">Nome de usuário</label>
+                            </div>
+                            
+                            <div className="form-floating mb-3">
+                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                                <label htmlFor="floatingInput" id="CadastroNome">Nome</label>
+                            </div>
+                            
+                            <div className="form-floating mb-3">
+                                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                                <label htmlFor="floatingInput" id="CadastroEmail">Email</label>
+                            </div>
+                            
+                            <div className="form-floating senha">
+                                <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
+                                <label htmlFor="floatingPassword" id="CadastroSenha">Senha</label>
+                            </div>
+                            
+                            <div className="form-floating option">
+                                <select className="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                    <option selected>Selecione o curso</option>
+                                    <option value="1">Computação</option>
+                                    <option value="2">Direito</option>
+                                    <option value="3">Sistemas</option>
+                                    <option value="4">Engenharia</option>
+                                </select>
+                                <label htmlFor="floatingSelect">Selecione o curso</label>
+                            </div>
+                            <button type="button" className="btn btn-secondary">Cadastrar</button>     
                         </div>
                 </DivHead>
         </>
