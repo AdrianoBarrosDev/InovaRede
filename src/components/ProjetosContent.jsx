@@ -49,6 +49,9 @@ const DivContent = styled.div`
 
 `;
 
+
+
+
 export function ProjetosContent() {
 
     return (
@@ -59,7 +62,7 @@ export function ProjetosContent() {
                 <button type="button" className="btn lupa">🔍︎</button>
             </form>
             <div className="down-buttons">
-                <button type="button" className="btn">➕︎ Novo Projeto</button>
+                <button className="btn" type="button"  data-bs-toggle="modal" data-bs-target="#newProject">➕︎ Novo Projeto</button>
                 <div className="dropdown">
                     <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar</button>
                 </div>

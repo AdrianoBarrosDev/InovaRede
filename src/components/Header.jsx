@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { NewProjectModal } from "./NewProjectModal";
+import { SolicitacoesModal } from "./SolicitacoesModal";
+
 
 const DivHead = styled.div`
   background-color: #DAE6F2;
@@ -38,6 +40,14 @@ const DivHead = styled.div`
   .btn {
     margin: 0px 15px 0px 15px;
   }
+
+.modal-container {
+  position: absolute;
+}
+
+.div_popup{
+    position: absolute !important;
+}
 `;
 
 export function Header() {
@@ -80,6 +90,7 @@ export function Header() {
 
             {/* Modal Novo Projeto */}
             <NewProjectModal />
+            <SolicitacoesModal />
 
         </>
     );

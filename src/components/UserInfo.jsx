@@ -134,7 +134,7 @@ const DivHead = styled.div`
 `;
 
 export function UserInfo() {
-
+    
     // Informações do Usuário
     const navigate = useNavigate();
     const { user, isLoading } = useUser();
