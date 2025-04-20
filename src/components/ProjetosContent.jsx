@@ -55,26 +55,24 @@ export function ProjetosContent() {
     return (
         <>
             <DivContent>
-            <h1 className="logo_projetos">InovaRede</h1>
-            <form className="d-flex" role="search">
-                <input className="form-control me-2" placeholder="Pesquise projetos de seu interesse..." aria-label="Search"/>
-                <button type="button" className="btn lupa">🔍︎</button>
-            </form>
-            <div className="down-buttons">
-                <button type="button" className="btn">➕︎ Novo Projeto</button>
-                <div className="dropdown">
-                    <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Filtrar
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">Action</a></li>
-                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <h1 className="logo_projetos">InovaRede</h1>
+                <form className="d-flex" role="search">
+                    <input className="form-control me-2" placeholder="Pesquise projetos de seu interesse..." aria-label="Search"/>
+                    <button type="button" className="btn lupa">🔍︎</button>
+                </form>
+                <div className="down-buttons">
+                    <button type="button" className="btn">➕︎ Novo Projeto</button>
+                    <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filtrar
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><a className="dropdown-item" href="#">Action</a></li>
+                            <li><a className="dropdown-item" href="#">Another action</a></li>
+                            <li><a className="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-
-            
             </DivContent>
         </>
     

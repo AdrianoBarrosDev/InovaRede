@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useUser } from "../context/UserContext";
 
@@ -90,47 +91,41 @@ export function LoginUser() {
     const { loginUser } = useUser();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handleClick = () => {
-        fetch("http://localhost:8080/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = "/projetos";
-                saveUser();
-            } else {
+    const handleClick = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+    
+            if (!response.ok) {
                 throw new Error("Login falhou");
             }
-        })
-        .catch(error => {
+    
+            await saveUser();
+            navigate("/projetos")
+
+        } catch (error) {
             console.error("Erro:", error);
             alert("Usuário ou senha inválidos!");
-        });
+        }
     };
     
-    const saveUser = () => {
+    const saveUser = async () => {
 
-        fetch(`http://localhost:8080/users/${username}`)
-        .then((response) => {
+        const response = await fetch(`http://localhost:8080/users/username/${username}`);
+    
+        if (!response.ok) {
+            throw new Error("Erro ao buscar dados");
+        }
 
-            // Verifica se a resposta foi bem-sucedida
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados');
-            }
-
-            const data = response.json(); // Converte a resposta para JSON
-            loginUser(data);
-
-        })
-        .catch(error => {
-            console.error("Erro:", error);
-            alert("Erro ao salvar usuário!");
-        });
+        const data = await response.json();
+        loginUser(data);
 
     }
 
