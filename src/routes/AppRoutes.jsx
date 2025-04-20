@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { CadastroUser } from "../components/CadastroUser";
-import { UserInfo } from "../components/UserInfo";
 import { Inicio } from "../pages/Inicio";
 import { Login } from "../pages/Login";
 import { Projetos } from "../pages/Projetos";
+import { Usuario } from "../pages/Usuario";
 
 export function AppRoutes() {
     return (
@@ -13,7 +13,7 @@ export function AppRoutes() {
             <Route path='/inicio' element={<Inicio />}/>
             <Route path='/cadastro' element={<CadastroUser />}/>
             <Route path='/projetos' element={<Projetos />}/>
-            <Route path='/usuario' element={<UserInfo />}/>
+            <Route path='/usuario' element={<Usuario />}/>
         </Routes>
     );
 }

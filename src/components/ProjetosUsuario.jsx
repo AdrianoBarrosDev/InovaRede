@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+
 import styled from "styled-components";
+import { useUser } from "../context/UserContext";
 import { ProjetosCard } from "./ProjetosCard";
 
 const DivContent = styled.div`
+
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -38,22 +41,19 @@ const DivContent = styled.div`
 
 `;
 
-export function ProjetosCards() {
+export function ProjetosUsuario () {
 
     const [projetos, setProjetos] = useState([]);
+    const { user, isLoading } = useUser();
 
     useEffect(() => {
+        if (isLoading || !user?.userId) return;
 
-        fetch('http://localhost:8080/projects')
-        .then(response => response.json())
-        .then(data => {
-            setProjetos(data);
-        })
-        .catch(error => {
-            console.error('Erro na requisição:', error);
-        });
-
-    }, []);
+        fetch(`http://localhost:8080/users/${user.userId}/projects`)
+            .then(response => response.json())
+            .then(data => setProjetos(data))
+            .catch(error => console.error('Erro na requisição:', error));
+    }, [user, isLoading]);
 
     return (
         <DivContent className="overflow-hidden">

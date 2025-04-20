@@ -5,8 +5,8 @@ export function Usuario() {
 
     return (
         <>
-             <Header />
-             <UserInfo />
+            <Header />
+            <UserInfo />
         </>
     );
 
