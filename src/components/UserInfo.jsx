@@ -131,13 +131,28 @@ const DivHead = styled.div`
         margin: 20px 0px 0px 0px;
     }
 
+    .custom-file-upload {
+        display: inline-block;
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: rgb(6, 40, 75);
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        margin-top: 30px;
+    }
+
+    .custom-file-upload:hover {
+        background-color: rgb(9, 55, 100);
+    }
+
 `;
 
 export function UserInfo() {
     
     // Informações do Usuário
     const navigate = useNavigate();
-    const { user, isLoading } = useUser();
+    const { user, loginUser, isLoading } = useUser();
 
     useEffect(() => {
         if (!isLoading && user === null) {
@@ -197,6 +212,7 @@ export function UserInfo() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [image, setImage] = useState("");
     const [course, setCourse] = useState("");
 
     useEffect(() => {
@@ -206,6 +222,7 @@ export function UserInfo() {
             setEmail(user.email || "");
             setPassword(user.password || "");
             setCourse(user.course || "");
+            setImage(user.image || "");
         }
     }, [user]);
 
@@ -216,26 +233,77 @@ export function UserInfo() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ username, name, email, password, course })
+            body: JSON.stringify({ username, name, email, password, image, course })
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error("Atualização de dados falhou");
+            } else {
+                saveUser();
             }
         })
         .catch(error => {
             console.error("Erro:", error);
         });
+
     };
 
+    const handleImageChange = (event) => {
+        const arquivo = event.target.files[0];
+        if (arquivo) {
+            const leitor = new FileReader();
+    
+            leitor.onloadend = () => {
+                setImage(leitor.result); // Aqui está a imagem em base64
+
+                fetch(`http://localhost:8080/users/${user.userId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ image: leitor.result })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Atualização de imagem falhou");
+                    } else {
+                        saveUser();
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                });
+            };
+    
+            leitor.readAsDataURL(arquivo);
+        }
+    };
+
+    const saveUser = async () => {
+
+        const response = await fetch(`http://localhost:8080/users/username/${username}`);
+    
+        if (!response.ok) {
+            throw new Error("Erro ao buscar dados");
+        }
+
+        const data = await response.json();
+        loginUser(data);
+
+    }
 
     return (
         <>
             <DivHead>
                 <div className="user_info">
                     <div className="user_img">
-                        <img src="images/user_icon.png" className="img-fluid" alt=""/>
+                        <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt=""/>
                     </div>
+                    <div className="d-flex">
+                        <div>{name}</div>
+                        <div>{course}</div>
+                    </div>
+                    
                 </div>
                 <div className="tabs">
                     <button ref={el => tabsRef.current[0] = el} className="tab_btn active">Meus Projetos</button>
@@ -283,9 +351,10 @@ export function UserInfo() {
 
                             <div className="img_edit">
                                 <div className="user_img_edit">
-                                    <img src="images/user_icon.png" className="img-fluid" alt="Imagem do Usuário"/>
+                                    <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt="Imagem do Usuário"/>
                                 </div>
-                                <button type="button" className="btn btn-secondary">Alterar Imagem</button>
+                                <label htmlFor="infoImage" className="custom-file-upload">Alterar Imagem</label>
+                                <input type="file" id="infoImage" style={{display: "none"}} onChange={handleImageChange}/>
                             </div>
                         </div>
 
