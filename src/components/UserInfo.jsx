@@ -338,7 +338,7 @@ export function UserInfo() {
             <DivHead>
                 <div className="user_info">
                     <div className="user_img">
-                        <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt=""/>
+                        <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt="" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
                     </div>
                     <div className="d-flex flex-column justify-content-center align-items-start gap-5">
                         <div className="user_text d-flex justify-content-center align-items-start">
@@ -474,7 +474,7 @@ export function UserInfo() {
 
                             <div className="img_edit">
                                 <div className="user_img_edit">
-                                    <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt="Imagem do Usuário"/>
+                                    <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt="Imagem do Usuário" style={{width: "100%", height: "100%", objectFit: "cover"}}/>
                                 </div>
                                 <label htmlFor="infoImage" className="custom-file-upload">Alterar Imagem</label>
                                 <input type="file" id="infoImage" style={{display: "none"}} onChange={handleImageChange}/>
