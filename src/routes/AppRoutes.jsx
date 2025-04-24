@@ -8,7 +8,7 @@ import { Usuario } from "../pages/Usuario";
 export function AppRoutes() {
     return (
         <Routes>
-            <Route path='/' element={<Login />}/>
+            <Route path='/' element={<Inicio />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/inicio' element={<Inicio />}/>
             <Route path='/cadastro' element={<CadastroUser />}/>

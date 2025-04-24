@@ -15,7 +15,8 @@ const DivHead = styled.div`
     }
 
     .tab_btn {
-        padding: 10px 60px;
+        margin-left: 30px;
+        padding: 10px 30px;
         cursor: pointer;
         border: none;
         background: none;
@@ -35,12 +36,18 @@ const DivHead = styled.div`
         display: none;
     }
 
+    .contentProjects {
+        width: 100%;
+    }
+    .contentInformations {
+        width: 70%;
+    }
+
     .content.active {
         display: block;
         display:flex;
         justify-content: center;
         align-items: center;
-        width: 70%;
     }
 
     .user_info{
@@ -48,6 +55,23 @@ const DivHead = styled.div`
         background-color: #E0E0E0;
         width: 70%;
         border-radius: 100px 100px 0px 0px;
+        display: flex;
+        justify-content: start;
+        font-family: "Lexend Deca";
+        gap: 44px;
+    }
+
+    .user_text {
+        gap: 40px;
+    }
+    .user_name {
+        font-weight: 400;
+        font-size: 50px;
+    }
+    .user_course {
+        opacity: 0.5;
+        font-size: 25px;
+        margin-top: 26px;
     }
 
     .user_img{
@@ -94,7 +118,7 @@ const DivHead = styled.div`
 
     .form-floating{
         width: 100%;
-        margin: 20px 0px 0px 50px;
+        margin-top: 20px;
     }
 
     .btn-primary{
@@ -106,8 +130,10 @@ const DivHead = styled.div`
 
     .text_info_edit{
         width: 30%;
-        margin: 0px 0px 0px -80px;
-        justify-content: left;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
     }
     .user_div{
         background-color: #E0E0E0;
@@ -146,13 +172,28 @@ const DivHead = styled.div`
         background-color: rgb(9, 55, 100);
     }
 
+    .form-control,
+    .form-select {
+        padding: 0px 10px !important;
+    }
+
+    .exitButton {
+        background-color: #E83F3F;
+        width: 125px;
+        height: 40px;
+        color: white;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+
 `;
 
 export function UserInfo() {
     
     // Informações do Usuário
     const navigate = useNavigate();
-    const { user, loginUser, isLoading } = useUser();
+    const { user, loginUser, isLoading, logoutUser } = useUser();
 
     useEffect(() => {
         if (!isLoading && user === null) {
@@ -299,11 +340,13 @@ export function UserInfo() {
                     <div className="user_img">
                         <img src={image ? image : "images/user_icon.png"} className="img-fluid" alt=""/>
                     </div>
-                    <div className="d-flex">
-                        <div>{name}</div>
-                        <div>{course}</div>
+                    <div className="d-flex flex-column justify-content-center align-items-start gap-5">
+                        <div className="user_text d-flex justify-content-center align-items-start">
+                            <div className="user_name">{name}</div>
+                            <div className="user_course">{course}</div>
+                        </div>
+                        <button className="exitButton" onClick={logoutUser}>Sair</button>
                     </div>
-                    
                 </div>
                 <div className="tabs">
                     <button ref={el => tabsRef.current[0] = el} className="tab_btn active">Meus Projetos</button>
@@ -311,11 +354,11 @@ export function UserInfo() {
                     <div ref={lineRef} className="line"></div>
                 </div>
 
-                <div ref={el => allContentRef.current[0] = el} className="content active">
+                <div ref={el => allContentRef.current[0] = el} className="content contentProjects active">
                     <ProjetosUsuario />
                 </div>
 
-                <div ref={el => allContentRef.current[1] = el} className="content" style={{marginBottom: "100px"}}>
+                <div ref={el => allContentRef.current[1] = el} className="content contentInformations" style={{marginBottom: "100px"}}>
                     <div className="user_div">
                         <div className="user_info_edit">
                             <div className="text_info_edit">
@@ -341,12 +384,92 @@ export function UserInfo() {
                                 </div>
 
                                 <div className="form-floating">
-                                    <select className="form-select" aria-label="Floating label disabled select example" disabled={isDisabled} value={course} onChange={e => setCourse(e.target.value)}>
-                                        <option value="1">Ciência da Computação</option>
-                                        <option value="2">Direito</option>
-                                        <option value="3">Engenharia</option>
+                                <div htmlFor="infoCourse">Curso</div>
+                                    <select id="infoCourse" className="form-select" aria-label="Floating label disabled select example" disabled={isDisabled} value={course} onChange={e => setCourse(e.target.value)}>
+                                        <optgroup label="Ciências Humanas">
+                                            <option>Ciências Biológicas (Bacharelado e Licenciatura)</option>
+                                            <option>Filosofia</option>
+                                            <option>Geografia</option>
+                                            <option>História</option>
+                                            <option>Jornalismo</option>
+                                            <option>Letras Português/Inglês</option>
+                                            <option>Música</option>
+                                            <option>Pedagogia</option>
+                                            <option>Psicologia</option>
+                                            <option>Relações Internacionais</option>
+                                        </optgroup>
+
+                                        <optgroup label="Direito">
+                                            <option>Direito</option>
+                                        </optgroup>
+
+                                        <optgroup label="Engenharia">
+                                            <option>Engenharia Ambiental</option>
+                                            <option>Engenharia Civil</option>
+                                            <option>Engenharia de Computação</option>
+                                            <option>Engenharia de Produção</option>
+                                            <option>Engenharia Elétrica</option>
+                                            <option>Engenharia Mecânica</option>
+                                            <option>Engenharia Química</option>
+                                        </optgroup>
+
+                                        <optgroup label="Gestão e Negócios">
+                                            <option>Administração</option>
+                                            <option>Ciências Contábeis</option>
+                                            <option>Comércio Exterior</option>
+                                            <option>Gastronomia</option>
+                                            <option>Gestão Comercial</option>
+                                            <option>Gestão da Tecnologia da Informação</option>
+                                            <option>Gestão de Recursos Humanos</option>
+                                            <option>Gestão Financeira</option>
+                                            <option>Logística</option>
+                                            <option>Marketing</option>
+                                            <option>Processos Gerenciais</option>
+                                            <option>Publicidade e Propaganda</option>
+                                            <option>Turismo</option>
+                                        </optgroup>
+
+                                        <optgroup label="Outros">
+                                            <option>Educação Física</option>
+                                            <option>Química Tecnológica</option>
+                                            <option>Tradução e Interpretação</option>
+                                        </optgroup>
+
+                                        <optgroup label="Saúde">
+                                            <option>Biomedicina</option>
+                                            <option>Enfermagem</option>
+                                            <option>Farmácia</option>
+                                            <option>Fisioterapia</option>
+                                            <option>Nutrição</option>
+                                            <option>Odontologia</option>
+                                        </optgroup>
+
+                                        <optgroup label="Tecnologia e Informação">
+                                            <option>Análise e Desenvolvimento de Sistemas</option>
+                                            <option>Arquitetura e Urbanismo</option>
+                                            <option>Ciência da Computação</option>
+                                            <option>Cinema e Audiovisual</option>
+                                            <option>Redes de Computadores</option>
+                                            <option>Sistemas de Informação</option>
+                                        </optgroup>
                                     </select>
                                 </div>
+
+                                <button 
+                                    type="button" 
+                                    className="btn btn-primary" 
+                                    style={{width: "200px"}}
+                                    onClick={() => {
+                                        if (isDisabled) {
+                                            setIsDisabled(false); // Habilita os campos
+                                        } else {
+                                            setIsDisabled(true);
+                                            handleClick();
+                                        }
+                                    }}
+                                >
+                                    {isDisabled ? "Alterar Dados" : "Salvar Alterações"}
+                                </button>
                             </div>
 
                             <div className="img_edit">
@@ -358,23 +481,6 @@ export function UserInfo() {
                             </div>
                         </div>
 
-
-                        <div className="mt-3">
-                            <button 
-                                type="button" 
-                                className="btn btn-primary" 
-                                onClick={() => {
-                                    if (isDisabled) {
-                                        setIsDisabled(false); // Habilita os campos
-                                    } else {
-                                        setIsDisabled(true);
-                                        handleClick();
-                                    }
-                                }}
-                            >
-                                {isDisabled ? "Alterar Dados" : "Salvar Alterações"}
-                            </button>
-                        </div>
                     </div>
                 </div>
             </DivHead>

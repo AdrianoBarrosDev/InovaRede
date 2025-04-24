@@ -141,11 +141,72 @@ export function CadastroUser() {
                     
                     <div className="form-floating option">
                         <select className="form-select" id="registerCourse" aria-label="Floating label select example">
-                            <option value="" disabled hidden>Selecione o curso</option>
-                            <option value="Computação">Computação</option>
-                            <option value="Direito">Direito</option>
-                            <option value="Sistemas">Sistemas</option>
-                            <option value="Engenharia">Engenharia</option>
+                            <optgroup label="Ciências Humanas">
+                                <option>Ciências Biológicas (Bacharelado e Licenciatura)</option>
+                                <option>Filosofia</option>
+                                <option>Geografia</option>
+                                <option>História</option>
+                                <option>Jornalismo</option>
+                                <option>Letras Português/Inglês</option>
+                                <option>Música</option>
+                                <option>Pedagogia</option>
+                                <option>Psicologia</option>
+                                <option>Relações Internacionais</option>
+                            </optgroup>
+
+                            <optgroup label="Direito">
+                                <option>Direito</option>
+                            </optgroup>
+
+                            <optgroup label="Engenharia">
+                                <option>Engenharia Ambiental</option>
+                                <option>Engenharia Civil</option>
+                                <option>Engenharia de Computação</option>
+                                <option>Engenharia de Produção</option>
+                                <option>Engenharia Elétrica</option>
+                                <option>Engenharia Mecânica</option>
+                                <option>Engenharia Química</option>
+                            </optgroup>
+
+                            <optgroup label="Gestão e Negócios">
+                                <option>Administração</option>
+                                <option>Ciências Contábeis</option>
+                                <option>Comércio Exterior</option>
+                                <option>Gastronomia</option>
+                                <option>Gestão Comercial</option>
+                                <option>Gestão da Tecnologia da Informação</option>
+                                <option>Gestão de Recursos Humanos</option>
+                                <option>Gestão Financeira</option>
+                                <option>Logística</option>
+                                <option>Marketing</option>
+                                <option>Processos Gerenciais</option>
+                                <option>Publicidade e Propaganda</option>
+                                <option>Turismo</option>
+                            </optgroup>
+
+                            <optgroup label="Outros">
+                                <option>Educação Física</option>
+                                <option>Química Tecnológica</option>
+                                <option>Tradução e Interpretação</option>
+                            </optgroup>
+
+                            <optgroup label="Saúde">
+                                <option>Biomedicina</option>
+                                <option>Enfermagem</option>
+                                <option>Farmácia</option>
+                                <option>Fisioterapia</option>
+                                <option>Nutrição</option>
+                                <option>Odontologia</option>
+                            </optgroup>
+
+                            <optgroup label="Tecnologia e Informação">
+                                <option>Análise e Desenvolvimento de Sistemas</option>
+                                <option>Arquitetura e Urbanismo</option>
+                                <option>Ciência da Computação</option>
+                                <option>Cinema e Audiovisual</option>
+                                <option>Redes de Computadores</option>
+                                <option>Sistemas de Informação</option>
+                            </optgroup>
                         </select>
                         <label htmlFor="registerCourse">Selecione o curso</label>
                     </div>

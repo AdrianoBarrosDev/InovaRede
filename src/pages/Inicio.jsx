@@ -10,7 +10,6 @@ export function Inicio() {
             <HeaderInicio />
             <TopInicio />
             <ContentInicio />
-            
         </>
     );
 

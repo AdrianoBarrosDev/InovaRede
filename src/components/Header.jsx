@@ -1,10 +1,11 @@
 import * as bootstrap from 'bootstrap';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useUser } from '../context/UserContext';
 import { NewProjectModal } from './NewProjectModal';
 import { SolicitacoesModal } from './SolicitacoesModal';
+import { SolicitationsPopoverContent } from './SolicitationsPopoverContent';
 
 const DivHead = styled.div`
   background-color: #DAE6F2;
@@ -16,6 +17,7 @@ const DivHead = styled.div`
   .navbar-brand {
     font-family: 'Lexend Mega', sans-serif;
     font-size: 30px;
+    margin: 0;
   }
 
   .perfil {
@@ -51,6 +53,18 @@ const DivHead = styled.div`
   .div_popup{
     position: absolute !important;
   }
+
+  .profileButton {
+    background: none;
+    border-radius: 50%;
+    border: none;
+    overflow: hidden;
+    width: 60px;
+    height: 50px;
+  }
+  .profileButton img {
+    border-radius: 50%;
+  }
 `;
 
 const PopoverDiv = styled.div`
@@ -58,7 +72,24 @@ const PopoverDiv = styled.div`
 `;
 
 export function Header() {
+
   const { user } = useUser();
+  const [solicitations, setSolicitations] = useState([]);
+
+  const fetchSolicitations = () => {
+    
+    if (!user) return;
+  
+    fetch(`http://localhost:8080/solicitations/${user.userId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSolicitations(data);
+      })
+      .catch((error) => {
+        console.error("Erro na requisição:", error);
+      });
+
+  };
 
   useEffect(() => {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
@@ -75,10 +106,11 @@ export function Header() {
       <Popover.Header as="h3">Solicitações</Popover.Header>
       <Popover.Body>
         <PopoverDiv>
-          Aqui você pode visualizar e gerenciar suas solicitações pendentes.
-          <Button className="btn" onClick={() => alert('Gerenciar Solicitações')}>
-            Gerenciar Solicitações
-          </Button>
+          {solicitations.map((solicitation) => {
+              return (
+                <SolicitationsPopoverContent key={solicitation.solicitationId} solicitation={solicitation}/>
+              );
+          })}
         </PopoverDiv>
       </Popover.Body>
     </Popover>
@@ -118,21 +150,19 @@ export function Header() {
                 </li>
                 <li className="nav-item">
                   <OverlayTrigger trigger="click" placement="bottom" overlay={popover} rootClose>
-                    <Button style={{border: "none", background: "none", color: "black"}}>Solicitações</Button>
+                    <Button style={{border: "none", background: "none", color: "black"}} onClick={fetchSolicitations}>Solicitações</Button>
                   </OverlayTrigger>
                 </li>
               </ul>
             </div>
-            <div className="user_button">
-              <a href="http://localhost:5173/usuario" className="btn perfil">
-                <img
-                  src={user?.image ? user.image : 'images/user_icon.png'}
-                  className="img-fluid"
-                  alt="Usuário"
-                  style={{ objectFit: 'contain', width: '50px', height: '50px' }}
-                />
-              </a>
-            </div>
+            <button className="profileButton" onClick={() => window.location.href="http://localhost:5173/usuario"}>
+              <img
+                src={user?.image ? user.image : 'images/user_icon.png'}
+                className="img-fluid"
+                alt="Usuário"
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              />
+            </button>
           </div>
         </nav>
       </DivHead>

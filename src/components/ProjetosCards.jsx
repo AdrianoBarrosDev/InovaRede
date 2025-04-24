@@ -7,6 +7,7 @@ const DivContent = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-bottom: 100px;
+    width: 100%;
 
     .cards_projetos{
         margin-top: 100px;
@@ -58,9 +59,9 @@ export function ProjetosCards() {
     return (
         <DivContent className="overflow-hidden">
             <div className="cards_projetos row gap-4">
-                {projetos.map((projeto) => {
+                {projetos.map((project) => {
                     return (
-                        <ProjetosCard key={projeto.projectId} projeto={projeto}/>
+                        <ProjetosCard key={project.projectId} project={project}/>
                     );
                 })}
             </div>
