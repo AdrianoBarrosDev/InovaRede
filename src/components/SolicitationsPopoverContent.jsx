@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const PopoverDiv = styled.div`
+  padding: 16px;
 
   .img_perfil_soli {
     border-radius: 100%;
@@ -16,12 +17,13 @@ const PopoverDiv = styled.div`
   }
 
   img {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 
   .img-fluid {
     max-width: 200%;
+    max-height: auto;
   }
   
   .popup{
@@ -49,7 +51,8 @@ const PopoverDiv = styled.div`
   .buttons_op{
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
+    gap: 10%;
   }
 `;
 
@@ -101,10 +104,10 @@ export function SolicitationsPopoverContent({ solicitation }) {
   return (
     <PopoverDiv>
       <div className='popup'>
-        <div className='img_perfil_soli'>
-          <img src="images/user_icon.png" className="img-fluid" alt="..."/>
+        <div className='img_perfil_soli col-4'>
+          <img src={solicitation.sender.image ? solicitation.sender.image : "images/user_icon.png"} className="img-fluid" alt=" " style={{objectFit: "contain"}}/>
         </div>
-        <div className='info_text'>
+        <div className='info_text col-8'>
           <div className='text_soli'>
             <p className='text_nome'>Solicitação de {solicitation.sender.username}</p>
             <p className='text_projeto'>Participar de {solicitation.project.name}</p>

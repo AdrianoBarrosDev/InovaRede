@@ -34,10 +34,6 @@ const DivHead = styled.div`
     justify-content: center;
   }
 
-  .img-fluid {
-    max-width: 300%;
-  }
-
   .btn-dark {
     color: white;
   }
@@ -104,7 +100,7 @@ export function Header() {
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header as="h3">Solicitações</Popover.Header>
-      <Popover.Body>
+      <Popover.Body className="p-0">
         <PopoverDiv>
           {solicitations.map((solicitation) => {
               return (
@@ -155,12 +151,11 @@ export function Header() {
                 </li>
               </ul>
             </div>
-            <button className="profileButton" onClick={() => window.location.href="http://localhost:5173/usuario"}>
+            <button className="profileButton d-flex justify-content-center align-items-center overflow-hidden" style={{ width: '55px', height: '55px' }} onClick={() => window.location.href="http://localhost:5173/usuario"}>
               <img
                 src={user?.image ? user.image : 'images/user_icon.png'}
-                className="img-fluid"
                 alt="Usuário"
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                style={{ objectFit: 'contain', width: '75px', height: '75px' }}
               />
             </button>
           </div>

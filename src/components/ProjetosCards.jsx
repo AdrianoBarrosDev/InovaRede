@@ -39,13 +39,20 @@ const DivContent = styled.div`
 
 `;
 
-export function ProjetosCards() {
+export function ProjetosCards({ searchText, filter, username }) {
 
     const [projetos, setProjetos] = useState([]);
 
     useEffect(() => {
+        
+        if (!username) return;
 
-        fetch('http://localhost:8080/projects')
+        const params = new URLSearchParams();
+        if(searchText) params.append("name", searchText);
+        if(filter) params.append("course", filter);
+        if(username) params.append("username", username);
+
+        fetch(`http://localhost:8080/projects?${params.toString()}`)
         .then(response => response.json())
         .then(data => {
             setProjetos(data);
@@ -54,7 +61,7 @@ export function ProjetosCards() {
             console.error('Erro na requisição:', error);
         });
 
-    }, []);
+    }, [searchText, filter]);
 
     return (
         <DivContent className="overflow-hidden">

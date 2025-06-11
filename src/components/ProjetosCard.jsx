@@ -30,10 +30,17 @@ const CustomCard = styled.div`
         color: white;
     }
 
+    .participa {
+        background-color: #d1d3d4 !important;
+        color: black;
+        font-size: 13px;
+    }
+
 `;
 
 export function ProjetosCard({ project }) {
-
+    
+    console.log(project);
     const { user } = useUser();
 
     const handleClick = () => {
@@ -62,7 +69,10 @@ export function ProjetosCard({ project }) {
             <div className="card-body px-1">
                 <h5 className="card-title">{project.name}</h5>
                 <p className="card-text">{project.description}</p>
-                <button className="btnSolicitar" onClick={handleClick}>Solicitar</button>
+                {project.participating ? 
+                    <button className="btnSolicitar participa" onClick={handleClick}>Já Participa</button> : <button className="btnSolicitar" onClick={handleClick}>Solicitar</button>
+                }
+                
             </div>
         </CustomCard>
     );

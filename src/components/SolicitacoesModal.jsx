@@ -23,9 +23,6 @@ export function SolicitacoesModal() {
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
 
-            <div className="modal-body">
-            </div>
-
           </div>
         </div>
 

@@ -61,7 +61,7 @@ export function ProjetosUsuario () {
             <div className="cards_projetos row gap-4">
                 {projetos.map((project) => {
                     return (
-                        <ProjetosCard key={project.projectId} project={project}/>
+                        <ProjetosCard key={project.projectId} project={{ ...project, participating: true }} />
                     );
                 })}
             </div>
